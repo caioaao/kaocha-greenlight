@@ -19,21 +19,21 @@
 
 (def test-suite-blue {::testable/type               :kaocha.type/greenlight
                       ::testable/id                 :integration-blue
-                      :kaocha.greenlight/new-system #'kaocha.type.greenlight-test/new-system-1
+                      :kaocha.greenlight/new-system 'kaocha.type.greenlight-test/new-system-1
                       :kaocha/ns-patterns           ["blue-test$"]
                       :kaocha/source-paths          ["src"]
                       :kaocha/test-paths            ["test"]})
 
 (def test-suite-red {::testable/type               :kaocha.type/greenlight
                      ::testable/id                 :integration-red
-                     :kaocha.greenlight/new-system #'kaocha.type.greenlight-test/new-system-2
+                     :kaocha.greenlight/new-system 'kaocha.type.greenlight-test/new-system-2
                      :kaocha/ns-patterns           ["red-test$"]
                      :kaocha/source-paths          ["src"]
                      :kaocha/test-paths            ["test"]})
 
 (def full-test-suite {::testable/type               :kaocha.type/greenlight
                       ::testable/id                 :integration-blue
-                      :kaocha.greenlight/new-system #'kaocha.type.greenlight-test/new-system-1
+                      :kaocha.greenlight/new-system 'kaocha.type.greenlight-test/new-system-1
                       :kaocha/ns-patterns           ["-test$"]
                       :kaocha/source-paths          ["src"]
                       :kaocha/test-paths            ["test"]})
