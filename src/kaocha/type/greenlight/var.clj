@@ -14,10 +14,7 @@
    :kaocha.result/error   (:error rs 0)
    :kaocha.result/fail    (:fail rs 0)
    :kaocha.result/pending (:pending rs 0)
-   :kaocha.result/count   (->> (select-keys rs [:pass :error :fail :pending])
-                               vals
-                               (filter identity)
-                               (reduce + 0))})
+   :kaocha.result/count   1})
 
 (defn report [options event]
   (when (= :step-end (:type event))
