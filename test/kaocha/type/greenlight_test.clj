@@ -75,21 +75,21 @@
       full-test-results (testable/run full-test-plan full-test-plan)]
   (deftest running-tests
     (testing "counts are correctly tracked"
-      (is (match? #:kaocha.result{:count   13
+      (is (match? #:kaocha.result{:count   1
                                   :error   0
                                   :fail    0
                                   :pass    13
                                   :pending 0}
                   (kaocha.result/testable-totals blue-results)))
 
-      (is (match? #:kaocha.result{:count   10
+      (is (match? #:kaocha.result{:count   1
                                   :error   0
                                   :fail    1
                                   :pass    9
                                   :pending 0}
                   (kaocha.result/testable-totals red-results)))
 
-      (is (match? #:kaocha.result{:count   26
+      (is (match? #:kaocha.result{:count   2
                                   :error   0
                                   :fail    0
                                   :pass    26
