@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/caioaao/kaocha-greenlight/tree/master.svg?style=svg)](https://circleci.com/gh/caioaao/kaocha-greenlight/tree/master) [![Clojars Project](https://img.shields.io/clojars/v/caioaao/kaocha-greenlight.svg)](https://clojars.org/caioaao/kaocha-greenlight)
+
 # kaocha-greenlight
 
 ## Usage
