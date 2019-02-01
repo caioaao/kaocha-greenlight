@@ -19,7 +19,6 @@
    :cyan      36
    :white     37})
 
-
 (defn- sgr
   "Returns an ANSI escope string which will apply the given collection of SGR
   codes."
@@ -28,12 +27,10 @@
         codes (str/join \; codes)]
     (str \u001b \[ codes \m)))
 
-
 (defn- color
   [codes string]
   (let [codes (if (coll? codes) codes [codes])]
     (str (sgr codes) string (sgr [:none]))))
-
 
 (defn- state-color
   "Return the color keyword for the given outcome state."

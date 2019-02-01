@@ -16,7 +16,6 @@
           (is (= 3 baz))
           4))
 
-
 (deftest sample-test
   "A sample greenlight test in the blue test suite"
   [(sample-step
