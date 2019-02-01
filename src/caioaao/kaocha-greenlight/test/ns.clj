@@ -1,4 +1,4 @@
-(ns caioaao.kaocha-greenlight.ns
+(ns caioaao.kaocha-greenlight.test.ns
   (:require [kaocha.testable :as testable]
             [clojure.test :as t]
             [clojure.spec.alpha :as s]
@@ -6,14 +6,14 @@
             [kaocha.hierarchy :as hierarchy]))
 
 (defn- test-var->testable [v]
-  {::testable/type             :kaocha.type/greenlight.var
-   ::testable/id               (keyword (str v))
-   :caioaao.kaocha-greenlight/test-var v})
+  {::testable/type                          :caioaao.kaocha-greenlight.test/var
+   ::testable/id                            (keyword (str v))
+   :caioaao.kaocha-greenlight.test/test-var v})
 
 (defn- test-vars [ns]
   (->> ns ns-interns vals (filter (comp :greenlight.test/test meta))))
 
-(defmethod testable/-load :kaocha.type/greenlight.ns
+(defmethod testable/-load :caioaao.kaocha-greenlight.test/ns
   [testable]
   (let [ns-name (:kaocha.ns/name testable)]
     (try
@@ -27,7 +27,7 @@
         #_(kaocha.stacktrace/print-cause-trace t)
         (assoc testable :kaocha.test-plan/load-error t)))))
 
-(defmethod testable/-run :kaocha.type/greenlight.ns
+(defmethod testable/-run :caioaao.kaocha-greenlight.test/ns
   [testable test-plan]
   (t/do-report {:type :begin-test-ns, :ns (:kaocha.ns/name testable)})
   (let [results  (testable/run-testables (:kaocha.test-plan/tests testable) test-plan)
@@ -37,5 +37,5 @@
     (t/do-report {:type :end-test-ns, :ns (:kaocha.ns/ns testable)})
     testable))
 
-(s/def :kaocha.type/greenlight.ns (s/keys :req [::testable/type ::testable/id :kaocha.ns/name]))
-(hierarchy/derive! :kaocha.type/greenlight.ns :kaocha.testable.type/group)
+(s/def :caioaao.kaocha-greenlight.test/ns (s/keys :req [::testable/type ::testable/id :kaocha.ns/name]))
+(hierarchy/derive! :caioaao.kaocha-greenlight.test/ns :kaocha.testable.type/group)
