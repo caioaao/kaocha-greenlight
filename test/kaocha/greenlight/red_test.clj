@@ -1,4 +1,4 @@
-(ns kaocha.greenlight.red-test
+(ns caioaao.kaocha-greenlight.red-test
   (:require
    [clojure.test :refer [is]]
    [greenlight.step :as step :refer [defstep]]

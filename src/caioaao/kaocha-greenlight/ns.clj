@@ -1,4 +1,4 @@
-(ns kaocha.type.greenlight.ns
+(ns caioaao.kaocha-greenlight.ns
   (:require [kaocha.testable :as testable]
             [clojure.test :as t]
             [clojure.spec.alpha :as s]
@@ -8,7 +8,7 @@
 (defn- test-var->testable [v]
   {::testable/type             :kaocha.type/greenlight.var
    ::testable/id               (keyword (str v))
-   :kaocha.greenlight/test-var v})
+   :caioaao.kaocha-greenlight/test-var v})
 
 (defn- test-vars [ns]
   (->> ns ns-interns vals (filter (comp :greenlight.test/test meta))))

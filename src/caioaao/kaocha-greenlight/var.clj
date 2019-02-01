@@ -1,4 +1,4 @@
-(ns kaocha.type.greenlight.var
+(ns caioaao.kaocha-greenlight.var
   (:require [kaocha.testable :as testable]
             [clojure.test :as ctest]
             [clojure.spec.alpha :as s]
@@ -24,7 +24,7 @@
   (ctest/do-report event))
 
 (defmethod testable/-run :kaocha.type/greenlight.var
-  [{:keys [kaocha.greenlight/test-var] :as testable} {:keys [kaocha.greenlight/system] :as test-plan}]
+  [{:keys [caioaao.kaocha-greenlight/test-var] :as testable} {:keys [caioaao.kaocha-greenlight/system] :as test-plan}]
   (ctest/do-report {:type :begin-test-var, :var test-var})
   (binding [ctest/*report-counters* (ref ctest/*initial-report-counters*)
             test/*report* (partial report {:print-color true})]
@@ -33,7 +33,7 @@
       (ctest/do-report {:type :end-test-var, :var test-var})
       (merge testable (test-results->kaocha @ctest/*report-counters*)))))
 
-(s/def :kaocha.greenlight/test-var var?)
-(s/def :kaocha.type/greenlight.var (s/keys :req [::testable/type :kaocha.greenlight/test-var]))
+(s/def :caioaao.kaocha-greenlight/test-var var?)
+(s/def :kaocha.type/greenlight.var (s/keys :req [::testable/type :caioaao.kaocha-greenlight/test-var]))
 
 (hierarchy/derive! :kaocha.type/greenlight.var :kaocha.testable.type/leaf)

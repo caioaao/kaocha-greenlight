@@ -1,12 +1,12 @@
-(ns kaocha.type.greenlight-test
+(ns caioaao.kaocha-greenlight-test
   (:require [clojure.test :refer :all]
             [com.stuartsierra.component :as component]
             [kaocha.testable :as testable]
             [kaocha.result]
             [matcher-combinators.test]
             [matcher-combinators.parser :refer [mimic-matcher]]
-            [kaocha.greenlight.blue-test]
-            [kaocha.greenlight.red-test]
+            [caioaao.kaocha-greenlight.blue-test]
+            [caioaao.kaocha-greenlight.red-test]
             [matcher-combinators.matchers :as matchers]))
 
 (mimic-matcher matchers/equals clojure.lang.Var)
@@ -19,21 +19,21 @@
 
 (def test-suite-blue {::testable/type               :kaocha.type/greenlight
                       ::testable/id                 :integration-blue
-                      :kaocha.greenlight/new-system 'kaocha.type.greenlight-test/new-system-1
+                      :caioaao.kaocha-greenlight/new-system 'caioaao.kaocha-greenlight-test/new-system-1
                       :kaocha/ns-patterns           ["blue-test$"]
                       :kaocha/source-paths          ["src"]
                       :kaocha/test-paths            ["test"]})
 
 (def test-suite-red {::testable/type               :kaocha.type/greenlight
                      ::testable/id                 :integration-red
-                     :kaocha.greenlight/new-system 'kaocha.type.greenlight-test/new-system-2
+                     :caioaao.kaocha-greenlight/new-system 'caioaao.kaocha-greenlight-test/new-system-2
                      :kaocha/ns-patterns           ["red-test$"]
                      :kaocha/source-paths          ["src"]
                      :kaocha/test-paths            ["test"]})
 
 (def full-test-suite {::testable/type               :kaocha.type/greenlight
                       ::testable/id                 :integration-blue
-                      :kaocha.greenlight/new-system 'kaocha.type.greenlight-test/new-system-1
+                      :caioaao.kaocha-greenlight/new-system 'caioaao.kaocha-greenlight-test/new-system-1
                       :kaocha/ns-patterns           ["-test$"]
                       :kaocha/source-paths          ["src"]
                       :kaocha/test-paths            ["test"]})
@@ -45,20 +45,20 @@
 
   (testing "filters the correct namespaces"
     (is (match? {:kaocha.test-plan/tests [{:kaocha.testable/type   :kaocha.type/greenlight.ns
-                                           :kaocha.testable/id     :kaocha.greenlight.blue-test
-                                           :kaocha.testable/desc   "kaocha.greenlight.blue-test"
-                                           :kaocha.ns/name         'kaocha.greenlight.blue-test
+                                           :kaocha.testable/id     :caioaao.kaocha-greenlight.blue-test
+                                           :kaocha.testable/desc   "caioaao.kaocha-greenlight.blue-test"
+                                           :kaocha.ns/name         'caioaao.kaocha-greenlight.blue-test
                                            :kaocha.test-plan/tests [{:kaocha.testable/type       :kaocha.type/greenlight.var
-                                                                     :kaocha.testable/id         :#'kaocha.greenlight.blue-test/sample-test
-                                                                     :kaocha.greenlight/test-var #'kaocha.greenlight.blue-test/sample-test}]}]}
+                                                                     :kaocha.testable/id         :#'caioaao.kaocha-greenlight.blue-test/sample-test
+                                                                     :caioaao.kaocha-greenlight/test-var #'caioaao.kaocha-greenlight.blue-test/sample-test}]}]}
                 (testable/load test-suite-blue)))
     (is (match? {:kaocha.test-plan/tests [{:kaocha.testable/type   :kaocha.type/greenlight.ns
-                                           :kaocha.testable/id     :kaocha.greenlight.red-test
-                                           :kaocha.testable/desc   "kaocha.greenlight.red-test"
-                                           :kaocha.ns/name         'kaocha.greenlight.red-test
+                                           :kaocha.testable/id     :caioaao.kaocha-greenlight.red-test
+                                           :kaocha.testable/desc   "caioaao.kaocha-greenlight.red-test"
+                                           :kaocha.ns/name         'caioaao.kaocha-greenlight.red-test
                                            :kaocha.test-plan/tests [{:kaocha.testable/type       :kaocha.type/greenlight.var
-                                                                     :kaocha.testable/id         :#'kaocha.greenlight.red-test/sample-test
-                                                                     :kaocha.greenlight/test-var #'kaocha.greenlight.red-test/sample-test}]}]}
+                                                                     :kaocha.testable/id         :#'caioaao.kaocha-greenlight.red-test/sample-test
+                                                                     :caioaao.kaocha-greenlight/test-var #'caioaao.kaocha-greenlight.red-test/sample-test}]}]}
                 (testable/load test-suite-red))))
 
   (testing "description is correct"

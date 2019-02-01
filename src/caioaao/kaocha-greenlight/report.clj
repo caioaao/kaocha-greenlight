@@ -1,4 +1,4 @@
-(ns kaocha.type.greenlight.report
+(ns caioaao.kaocha-greenlight.report
   (:require [clojure.test :as ctest]
             [greenlight.report]
             [clojure.string :as str]

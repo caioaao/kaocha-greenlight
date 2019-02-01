@@ -1,4 +1,4 @@
-(ns kaocha.type.greenlight
+(ns caioaao.kaocha-greenlight.test
   (:require [clojure.spec.alpha :as s]
             [clojure.test :as t]
             [com.stuartsierra.component :as component]
@@ -6,10 +6,10 @@
             [kaocha.load :as load]
             [kaocha.testable :as testable]
             [kaocha.type.ns :as type.ns]
-            [kaocha.type.greenlight.report]))
+            [caioaao.kaocha-greenlight.report]))
 
 (defn- ns->testable [ns]
-  (assoc (type.ns/->testable ns) :kaocha.testable/type :kaocha.type/greenlight.ns))
+  (assoc (type.ns/->testable ns) :kaocha.testable/type ::ns))
 
 (defn get-system [system-fn-symbol]
   (let [ns-name (symbol (namespace system-fn-symbol))]
@@ -17,20 +17,20 @@
       (require ns-name))
     ((resolve system-fn-symbol))))
 
-(defmethod testable/-load :kaocha.type/greenlight
-  [{:kaocha.greenlight/keys [new-system] :as testable}]
+(defmethod testable/-load :caioaao.kaocha-greenlight/test
+  [{:caioaao.kaocha-greenlight/keys [new-system] :as testable}]
   (assoc (load/load-test-namespaces testable ns->testable)
          ::testable/desc (str (name (::testable/id testable)) " (greenlight)")
-         :kaocha.greenlight/system (get-system new-system)))
+         :caioaao.kaocha-greenlight/system (get-system new-system)))
 
 ;; TODO add configuration parameter to restart system on each name space instead of here
-(defmethod testable/-run :kaocha.type/greenlight
-  [{:kaocha.greenlight/keys [system] :as testable} test-plan]
+(defmethod testable/-run :caioaao.kaocha-greenlight/test
+  [{:caioaao.kaocha-greenlight/keys [system] :as testable} test-plan]
   (t/do-report {:type :begin-test-suite})
   (let [system  (component/start system)
         results (try
                   (testable/run-testables (:kaocha.test-plan/tests testable)
-                                          (assoc test-plan :kaocha.greenlight/system system))
+                                          (assoc test-plan ::system system))
                   (finally (component/stop system)))
         testable (-> testable
                      (dissoc :kaocha.test-plan/tests)
@@ -38,10 +38,10 @@
     (t/do-report {:type :end-test-suite})
     testable))
 
-(s/def :kaocha.greenlight/new-system symbol?)
+(s/def :caioaao.kaocha-greenlight/new-system symbol?)
 
-(s/def :kaocha.type/greenlight (s/keys :req [::testable/type ::testable/id
-                                             :kaocha/ns-patterns :kaocha/source-paths :kaocha/test-paths
-                                             :kaocha.greenlight/new-system]))
+(s/def :caioaao.kaocha-greenlight/test (s/keys :req [::testable/type ::testable/id
+                                                     :kaocha/ns-patterns :kaocha/source-paths :kaocha/test-paths
+                                                     :caioaao.kaocha-greenlight/new-system]))
 
-(hierarchy/derive! :kaocha.type/greenlight :kaocha.testable.type/suite)
+(hierarchy/derive! :caioaao.kaocha-greenlight/test :kaocha.testable.type/suite)
