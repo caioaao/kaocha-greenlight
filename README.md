@@ -2,9 +2,29 @@
 
 # kaocha-greenlight
 
+Kaocha plugin to run [greenlight](/amperity/greenlight) tests.
+
+## Installing
+
+The project is published through Clojars with the identifier `caioaao/kaocha-greenlight`. You can find version information for the latest release at https://clojars.org/caioaao/kaocha-greenlight.
+
 ## Usage
 
-FIXME
+Declare a test suite on your [Kaocha config file](https://cljdoc.org/d/lambdaisland/kaocha/0.0-413/doc/3-configuration) with the type `:caioaao.kaocha-greenlight/test`. You'll also need to provide a value for `:caioaao.kaocha-greenlight/new-system`, which should be a function that receives no arguments and returns [a stuartsierra's system map](https://github.com/stuartsierra/component).
+
+A `tests.edn` example:
+
+```clojure
+#kaocha/v1
+{:tests [{:id           :integration
+          :type         :caioaao.kaocha-greenlight/test
+          :test-paths   ["test"]
+          :source-paths ["src"]
+          :ns-patterns  ["-flow$"]
+          :caioaao.kaocha-greenlight/new-system my.app/system-map}]}
+```
+
+For documentation on how to run tests, refer to [Kaocha](/lambdaisland/kaocha). For documentation regarding writing tests, refer to [Greenlight](/amperity/greenlight).
 
 ## License
 
