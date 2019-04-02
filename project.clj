@@ -1,4 +1,4 @@
-(defproject caioaao/kaocha-greenlight "0.1.0"
+(defproject caioaao/kaocha-greenlight "0.1.1"
   :description "Kaocha extension to run amperity/greenlight tests"
   :url "http://github.com/caioaao/kaocha-greenlight"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
@@ -13,7 +13,7 @@
                   ["change" "version"
                    "leiningen.release/bump-version" "patch"]
                   ["vcs" "commit"]
-                  ["vcs" "push"]]
+                  ["vcs" "push" "HEAD:master"]]
   :deploy-repositories [["clojars" {:url           "https://clojars.org/repo"
                                     :sign-releases false
                                     :username      :env/clojars_username
