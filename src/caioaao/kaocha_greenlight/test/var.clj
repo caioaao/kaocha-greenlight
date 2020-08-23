@@ -28,10 +28,9 @@
   (ctest/do-report {:type :begin-test-var, :var test-var})
   (binding [ctest/*report-counters* (ref ctest/*initial-report-counters*)
             test/*report* (partial report {:print-color true})]
-    (let [result (->> (test-var)
-                      (test/run-test! system))]
-      (ctest/do-report {:type :end-test-var, :var test-var})
-      (merge testable (test-results->kaocha @ctest/*report-counters*)))))
+    (test/run-test! system (test-var))
+    (ctest/do-report {:type :end-test-var, :var test-var})
+    (merge testable (test-results->kaocha @ctest/*report-counters*))))
 
 (s/def :caioaao.kaocha-greenlight.test/test-var var?)
 (s/def :caioaao.kaocha-greenlight.test/var (s/keys :req [::testable/type :caioaao.kaocha-greenlight.test/test-var]))
