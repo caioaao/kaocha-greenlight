@@ -1,9 +1,10 @@
 (ns caioaao.kaocha-greenlight.test.ns
-  (:require [kaocha.testable :as testable]
-            [clojure.test :as t]
+  (:require [caioaao.kaocha-greenlight.runner :as runner]
             [clojure.spec.alpha :as s]
+            [clojure.test :as t]
+            [kaocha.hierarchy :as hierarchy]
             [kaocha.output :as output]
-            [kaocha.hierarchy :as hierarchy]))
+            [kaocha.testable :as testable]))
 
 (defn- test-var->testable [v]
   {::testable/type                          :caioaao.kaocha-greenlight.test/var
@@ -24,16 +25,12 @@
            (assoc testable :kaocha.test-plan/tests))
       (catch Throwable t
         (output/warn "Failed loading " ns-name ": " (.getMessage t))
-        #_(kaocha.stacktrace/print-cause-trace t)
         (assoc testable :kaocha.test-plan/load-error t)))))
 
 (defmethod testable/-run :caioaao.kaocha-greenlight.test/ns
   [testable test-plan]
   (t/do-report {:type :begin-test-ns, :ns (:kaocha.ns/name testable)})
-  (let [results  (testable/run-testables (:kaocha.test-plan/tests testable) test-plan)
-        testable (-> testable
-                     (dissoc :kaocha.test-plan/tests)
-                     (assoc :kaocha.result/tests results))]
+  (let [testable (runner/run testable test-plan :ns)]
     (t/do-report {:type :end-test-ns, :ns (:kaocha.ns/ns testable)})
     testable))
 
