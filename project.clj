@@ -10,11 +10,7 @@
   :profiles {:dev {:dependencies [[nubank/matcher-combinators "0.4.2"]]
                    :plugins      [[lein-cljfmt "0.6.1"]]}}
   :repl-options {:init-ns kaocha-greenlight.core}
-  :release-tasks [["deploy" "clojars"]
-                  ["change" "version"
-                   "leiningen.release/bump-version" "patch"]
-                  ["vcs" "commit"]
-                  ["vcs" "push" "origin" "HEAD:master"]]
+  :release-tasks [["deploy" "clojars"]]
   :deploy-repositories [["clojars" {:url           "https://clojars.org/repo"
                                     :sign-releases false
                                     :username      :env/clojars_username
