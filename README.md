@@ -24,6 +24,21 @@ A `tests.edn` example:
           :caioaao.kaocha-greenlight/new-system my.app/system-map}]}
 ```
 
+You may configure `kaocha-greenlight` to create a new system for each namespace,
+which can be useful if you'd like a clean state for each namespace, e.g. if
+you're using ephemeral datastores:
+
+```clojure
+#kaocha/v1
+{:tests [{:id           :integration
+          :type         :caioaao.kaocha-greenlight/test
+          :test-paths   ["test"]
+          :source-paths ["src"]
+          :ns-patterns  ["-flow$"]
+          :caioaao.kaocha-greenlight/new-system my.app/system-map
+          :caioaao.kaocha-greenlight/system-scope :ns}]}
+```
+
 For documentation on how to run tests, refer to [Kaocha](/lambdaisland/kaocha). For documentation regarding writing tests, refer to [Greenlight](/amperity/greenlight).
 
 ## License

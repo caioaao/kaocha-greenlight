@@ -11,14 +11,18 @@
 
 (mimic-matcher matchers/equals clojure.lang.Var)
 
-(def counter (atom 0))
+(def starts (atom 0))
+(def stops (atom 0))
 
 (defn new-system [& _]
   (component/system-map :greenlight.test-test/component
                         (with-meta {}
                           {`component/start (fn [this]
-                                              (swap! counter inc) this)
-                           `component/stop  identity})))
+                                              (swap! starts inc)
+                                              this)
+                           `component/stop  (fn [this]
+                                              (swap! stops inc)
+                                              this)})))
 
 (def test-suite-test {::testable/type                       :caioaao.kaocha-greenlight/test
                       ::testable/id                         :integration-test
@@ -35,15 +39,19 @@
                     :kaocha/source-paths                    ["src"]
                     :kaocha/test-paths                      ["test"]})
 
-(deftest test-tests
+(deftest scope-tests
   (testing "system is created once when system-scope is :test"
     (let [test-test-plan (testable/load test-suite-test)]
-      (reset! counter 0)
+      (reset! starts 0)
+      (reset! stops 0)
       (testable/run test-test-plan test-test-plan)
-      (is (= @counter 1))))
+      (is (= @starts 1))
+      (is (= @stops 1))))
 
   (testing "system is created per ns when system-scope is :ns"
     (let [ns-test-plan (testable/load test-suite-ns)]
-      (reset! counter 0)
+      (reset! starts 0)
+      (reset! stops 0)
       (testable/run ns-test-plan ns-test-plan)
-      (is (= @counter 3)))))
+      (is (= @starts 3))
+      (is (= @stops 3)))))

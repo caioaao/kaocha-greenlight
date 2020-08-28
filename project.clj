@@ -5,9 +5,12 @@
             :url  "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [amperity/greenlight "0.4.0"]
-                 [lambdaisland/kaocha "1.0.669"]]
+                 [lambdaisland/kaocha "1.0.672"]]
   :aliases {"test" ["run" "-m" "kaocha.runner"]}
-  :profiles {:dev {:dependencies [[nubank/matcher-combinators "0.4.2"]]
+  :profiles {:dev {:dependencies [[nubank/matcher-combinators "0.4.2"]
+                                  [org.clojure/test.check "1.1.0"]
+                                  [expound "0.8.5"]]
+                   :source-paths ["dev"]
                    :plugins      [[lein-cljfmt "0.6.1"]]}}
   :repl-options {:init-ns kaocha-greenlight.core}
   :release-tasks [["deploy" "clojars"]]
