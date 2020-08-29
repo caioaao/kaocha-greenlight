@@ -3,9 +3,7 @@
             [clojure.test :as ctest]
             [clojure.spec.alpha :as s]
             [kaocha.hierarchy :as hierarchy]
-            [kaocha.report :as kaocha.report]
             [greenlight.test :as test]
-            [kaocha.type]
             [greenlight.step :as step]))
 
 (defn test-results->kaocha [rs]
@@ -24,7 +22,7 @@
 
 (defmethod testable/-run :caioaao.kaocha-greenlight.test/var
   [{:caioaao.kaocha-greenlight.test/keys [test-var] :as testable}
-   {:caioaao.kaocha-greenlight.test/keys [system] :as test-plan}]
+   {:caioaao.kaocha-greenlight.test/keys [system]}]
   (ctest/do-report {:type :begin-test-var, :var test-var})
   (binding [ctest/*report-counters* (ref ctest/*initial-report-counters*)
             test/*report* (partial report {:print-color true})]
