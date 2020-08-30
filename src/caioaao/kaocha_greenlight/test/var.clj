@@ -13,19 +13,22 @@
    :kaocha.result/pending (:pending rs 0)
    :kaocha.result/count   1})
 
-(defn report [options event]
-  (when (= :step-end (:type event))
-    (->> (:step event)
-         ::step/reports
-         (run! ctest/do-report)))
-  (ctest/do-report event))
+(defn report [event]
+  (let [{:keys [step type]}                     event
+        {::step/keys [outcome reports message]} step]
+    (when (= type :step-end)
+      (run! ctest/do-report reports))
+    (when (= outcome :error)
+      (ctest/report {:type    :error
+                     :message "Uncaught exception, not in assertion."
+                     :actual  message}))))
 
 (defmethod testable/-run :caioaao.kaocha-greenlight.test/var
   [{:caioaao.kaocha-greenlight.test/keys [test-var] :as testable}
    {:caioaao.kaocha-greenlight.test/keys [system]}]
   (ctest/do-report {:type :begin-test-var, :var test-var})
   (binding [ctest/*report-counters* (ref ctest/*initial-report-counters*)
-            test/*report* (partial report {:print-color true})]
+            test/*report* report]
     (test/run-test! system (test-var))
     (ctest/do-report {:type :end-test-var, :var test-var})
     (merge testable (test-results->kaocha @ctest/*report-counters*))))
