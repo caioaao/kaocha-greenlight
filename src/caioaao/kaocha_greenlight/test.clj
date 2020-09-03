@@ -1,27 +1,36 @@
 (ns caioaao.kaocha-greenlight.test
   (:require [clojure.spec.alpha :as s]
-            [clojure.test :as t]
             [kaocha.hierarchy :as hierarchy]
             [kaocha.load :as load]
+            [kaocha.test-suite :as test-suite]
             [kaocha.testable :as testable]
             [kaocha.type.ns :as type.ns]
             [caioaao.kaocha-greenlight.report]
+            [caioaao.kaocha-greenlight.test.ns]
             [caioaao.kaocha-greenlight.runner :as runner]))
+
+(defn- resolve-system
+  [system-fn-symbol]
+  (let [ns-name (symbol (namespace system-fn-symbol))]
+    (when-not (find-ns ns-name)
+      (require ns-name))
+    ((resolve system-fn-symbol))))
 
 (defn- ns->testable [ns]
   (assoc (type.ns/->testable ns) :kaocha.testable/type ::ns))
 
 (defmethod testable/-load :caioaao.kaocha-greenlight/test
   [testable]
-  (assoc (load/load-test-namespaces testable ns->testable)
-         ::testable/desc (str (name (::testable/id testable)) " (greenlight)")))
+  (-> (load/load-test-namespaces testable ns->testable)
+      (testable/add-desc "greenlight")
+      (assoc :caioaao.kaocha-greenlight.test/system
+             (-> testable
+                 :caioaao.kaocha-greenlight/new-system
+                 resolve-system))))
 
 (defmethod testable/-run :caioaao.kaocha-greenlight/test
   [testable test-plan]
-  (t/do-report {:type :begin-test-suite})
-  (let [testable (runner/run testable test-plan :test)]
-    (t/do-report {:type :end-test-suite})
-    testable))
+  (runner/run testable test-plan :test test-suite/run))
 
 (s/def :caioaao.kaocha-greenlight/new-system symbol?)
 

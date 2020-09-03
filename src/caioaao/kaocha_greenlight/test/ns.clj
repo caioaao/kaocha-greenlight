@@ -6,13 +6,23 @@
             [kaocha.output :as output]
             [kaocha.testable :as testable]))
 
-(defn- test-var->testable [v]
+(defn- test-var->testable
+  [v]
   {::testable/type                          :caioaao.kaocha-greenlight.test/var
    ::testable/id                            (keyword (str v))
    :caioaao.kaocha-greenlight.test/test-var v})
 
-(defn- test-vars [ns]
+(defn- test-vars
+  [ns]
   (->> ns ns-interns vals (filter (comp :greenlight.test/test meta))))
+
+(defn- run-testables
+  [testable test-plan]
+  (let [tests   (:kaocha.test-plan/tests testable)
+        results (testable/run-testables tests test-plan)]
+    (-> testable
+        (dissoc :kaocha.test-plan/tests)
+        (assoc :kaocha.result/tests results))))
 
 (defmethod testable/-load :caioaao.kaocha-greenlight.test/ns
   [testable]
@@ -29,10 +39,16 @@
 
 (defmethod testable/-run :caioaao.kaocha-greenlight.test/ns
   [testable test-plan]
-  (t/do-report {:type :begin-test-ns, :ns (:kaocha.ns/name testable)})
-  (let [testable (runner/run testable test-plan :ns)]
-    (t/do-report {:type :end-test-ns, :ns (:kaocha.ns/ns testable)})
-    testable))
+  (runner/run testable
+              test-plan
+              :ns
+              (fn [testable test-plan]
+                (t/do-report {:type :begin-test-ns
+                              :ns   (:kaocha.ns/name testable)})
+                (let [testable (run-testables testable test-plan)]
+                  (t/do-report {:type :end-test-ns
+                                :ns   (:kaocha.ns/ns testable)})
+                  testable))))
 
 (s/def :caioaao.kaocha-greenlight.test/ns (s/keys :req [::testable/type ::testable/id :kaocha.ns/name]))
 (hierarchy/derive! :caioaao.kaocha-greenlight.test/ns :kaocha.testable.type/group)
