@@ -8,6 +8,7 @@
                  [lambdaisland/kaocha "1.0.672"]]
   :aliases {"test" ["run" "-m" "kaocha.runner"]}
   :profiles {:dev {:dependencies [[nubank/matcher-combinators "0.4.2"]
+                                  [orchestra "2020.07.12-1"]
                                   [org.clojure/test.check "1.1.0"]
                                   [expound "0.8.5"]]
                    :source-paths ["dev"]
