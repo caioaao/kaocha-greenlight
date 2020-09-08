@@ -16,7 +16,7 @@
    :kaocha.result/count   1})
 
 (defn report
-  [options event]
+  [event]
   (when (= :step-end (:type event))
     (->> (:step event)
          ::step/reports
@@ -32,7 +32,7 @@
                    {:caioaao.kaocha-greenlight.test/keys [system]}]
                 (ctest/do-report {:type :begin-test-var, :var test-var})
                 (binding [ctest/*report-counters* (ref ctest/*initial-report-counters*)
-                          test/*report*           (partial report {:print-color true})]
+                          test/*report*           report]
                   (test/run-test! system (test-var))
                   (ctest/do-report {:type :end-test-var, :var test-var})
                   (merge testable (test-results->kaocha @ctest/*report-counters*))))))
