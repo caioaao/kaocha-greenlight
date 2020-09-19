@@ -34,7 +34,7 @@
 
 (s/def :caioaao.kaocha-greenlight/new-system symbol?)
 
-(s/def :caioaao.kaocha-greenlight/system-scope #{:test :ns})
+(s/def :caioaao.kaocha-greenlight/system-scope #{:test :ns :var})
 
 (s/def :caioaao.kaocha-greenlight/test
   (s/keys :req [::testable/type

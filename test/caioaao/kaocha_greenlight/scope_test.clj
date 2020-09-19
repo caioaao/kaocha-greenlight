@@ -40,6 +40,16 @@
                    :caioaao.kaocha-greenlight/new-system   'caioaao.kaocha-greenlight.scope-test/new-system
                    :caioaao.kaocha-greenlight/system-scope :ns}]})
 
+(def var-config
+  {:kaocha/tests [{:kaocha.testable/type :caioaao.kaocha-greenlight/test
+                   :kaocha.testable/id   :integration-test
+                   :kaocha/ns-patterns   ["scope-suite.*-test$"]
+                   :kaocha/source-paths  ["src"]
+                   :kaocha/test-paths    ["test"]
+
+                   :caioaao.kaocha-greenlight/new-system   'caioaao.kaocha-greenlight.scope-test/new-system
+                   :caioaao.kaocha-greenlight/system-scope :var}]})
+
 (deftest scope-tests
   (testing "system is created once when system-scope is :test"
     (reset! starts 0)
@@ -53,4 +63,11 @@
     (reset! stops 0)
     (api/run ns-config)
     (is (= @starts 3))
-    (is (= @stops 3))))
+    (is (= @stops 3)))
+
+  (testing "system is created per var when system-scope is :var"
+    (reset! starts 0)
+    (reset! stops 0)
+    (api/run var-config)
+    (is (= @starts 6))
+    (is (= @stops 6))))

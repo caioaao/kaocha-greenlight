@@ -39,6 +39,20 @@ you're using ephemeral datastores:
           :caioaao.kaocha-greenlight/system-scope :ns}]}
 ```
 
+You may also configure `kaocha-greenlight` to create a new system for each test
+var, for the same reasons as above:
+
+```clojure
+#kaocha/v1
+{:tests [{:id           :integration
+          :type         :caioaao.kaocha-greenlight/test
+          :test-paths   ["test"]
+          :source-paths ["src"]
+          :ns-patterns  ["-flow$"]
+          :caioaao.kaocha-greenlight/new-system my.app/system-map
+          :caioaao.kaocha-greenlight/system-scope :var}]}
+```
+
 For documentation on how to run tests, refer to [Kaocha](/lambdaisland/kaocha). For documentation regarding writing tests, refer to [Greenlight](/amperity/greenlight).
 
 ## License

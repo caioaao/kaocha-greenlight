@@ -1,6 +1,9 @@
 #kaocha/v1
- {:kaocha/plugins [:kaocha.plugin/profiling
-                   :kaocha.plugin.alpha/spec-test-check]
+ {:plugins [:kaocha.plugin/profiling
+            :kaocha.plugin/orchestra
+            :kaocha.plugin.alpha/spec-test-check]
+
+  :reporter kaocha.report/documentation
 
   :clojure.spec.test.check/instrument?    true
   :clojure.spec.test.check/check-asserts? true}
