@@ -9,7 +9,7 @@
 (defn- test-var->testable
   [v]
   {::testable/type                          :caioaao.kaocha-greenlight.test/var
-   ::testable/id                            (keyword (str v))
+   ::testable/id                            (keyword (symbol v))
    :caioaao.kaocha-greenlight.test/test-var v})
 
 (defn- test-vars
