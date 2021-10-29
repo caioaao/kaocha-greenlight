@@ -55,7 +55,7 @@
                                            :kaocha.testable/desc   "caioaao.kaocha-greenlight.test-suite.blue-test"
                                            :kaocha.ns/name         'caioaao.kaocha-greenlight.test-suite.blue-test
                                            :kaocha.test-plan/tests [{:kaocha.testable/type                    :caioaao.kaocha-greenlight.test/var
-                                                                     :kaocha.testable/id                      :#'caioaao.kaocha-greenlight.test-suite.blue-test/sample-test
+                                                                     :kaocha.testable/id                      :caioaao.kaocha-greenlight.test-suite.blue-test/sample-test
                                                                      :caioaao.kaocha-greenlight.test/test-var #'caioaao.kaocha-greenlight.test-suite.blue-test/sample-test}]}]}
                 (testable/load test-suite-blue)))
     (is (match? {:kaocha.test-plan/tests [{:kaocha.testable/type   :caioaao.kaocha-greenlight.test/ns
@@ -63,7 +63,7 @@
                                            :kaocha.testable/desc   "caioaao.kaocha-greenlight.test-suite.red-test"
                                            :kaocha.ns/name         'caioaao.kaocha-greenlight.test-suite.red-test
                                            :kaocha.test-plan/tests [{:kaocha.testable/type                    :caioaao.kaocha-greenlight.test/var
-                                                                     :kaocha.testable/id                      :#'caioaao.kaocha-greenlight.test-suite.red-test/sample-test
+                                                                     :kaocha.testable/id                      :caioaao.kaocha-greenlight.test-suite.red-test/sample-test
                                                                      :caioaao.kaocha-greenlight.test/test-var #'caioaao.kaocha-greenlight.test-suite.red-test/sample-test}]}]}
                 (testable/load test-suite-red))))
 
