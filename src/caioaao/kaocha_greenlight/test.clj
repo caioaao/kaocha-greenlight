@@ -1,22 +1,23 @@
 (ns caioaao.kaocha-greenlight.test
-  (:require [clojure.spec.alpha :as s]
-            [kaocha.hierarchy :as hierarchy]
-            [kaocha.load :as load]
-            [kaocha.test-suite :as test-suite]
-            [kaocha.testable :as testable]
-            [kaocha.type.ns :as type.ns]
-            [caioaao.kaocha-greenlight.report]
-            [caioaao.kaocha-greenlight.test.ns]
-            [caioaao.kaocha-greenlight.runner :as runner]))
+  (:require
+   [caioaao.kaocha-greenlight.runner :as runner]
+   [caioaao.kaocha-greenlight.test.ns]
+   [clojure.spec.alpha :as s]
+   [kaocha.hierarchy :as hierarchy]
+   [kaocha.load :as load]
+   [kaocha.test-suite :as test-suite]
+   [kaocha.testable :as testable]
+   [kaocha.type.ns :as type.ns]))
 
-(defn- resolve-system
+(defn ^:private resolve-system
   [system-fn-symbol]
   (let [ns-name (symbol (namespace system-fn-symbol))]
     (when-not (find-ns ns-name)
       (require ns-name))
     ((resolve system-fn-symbol))))
 
-(defn- ns->testable [ns]
+(defn ^:private ns->testable
+  [ns]
   (assoc (type.ns/->testable ns) :kaocha.testable/type ::ns))
 
 (defmethod testable/-load :caioaao.kaocha-greenlight/test

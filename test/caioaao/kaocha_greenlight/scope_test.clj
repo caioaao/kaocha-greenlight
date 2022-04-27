@@ -1,9 +1,10 @@
 (ns caioaao.kaocha-greenlight.scope-test
-  (:require [clojure.test :refer [deftest testing is]]
-            [com.stuartsierra.component :as component]
-            [kaocha.api :as api]
-            [matcher-combinators.matchers :as matchers]
-            [matcher-combinators.parser :refer [mimic-matcher]]))
+  (:require
+   [clojure.test :refer [deftest testing is]]
+   [com.stuartsierra.component :as component]
+   [kaocha.api :as api]
+   [matcher-combinators.matchers :as matchers]
+   [matcher-combinators.parser :refer [mimic-matcher]]))
 
 (mimic-matcher matchers/equals clojure.lang.Var)
 
