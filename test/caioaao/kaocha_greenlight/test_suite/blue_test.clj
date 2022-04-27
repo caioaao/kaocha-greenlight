@@ -1,7 +1,8 @@
 (ns caioaao.kaocha-greenlight.test-suite.blue-test
-  (:require [greenlight.step :as step :refer [defstep]]
-            [clojure.test :refer [is]]
-            [greenlight.test :as test :refer [deftest]]))
+  (:require
+   [clojure.test :refer [is]]
+   [greenlight.step :as step :refer [defstep]]
+   [greenlight.test :as test :refer [deftest]]))
 
 (defstep sample-step
   "A sample greenlight test step in the blue test suite"

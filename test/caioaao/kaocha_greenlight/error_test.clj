@@ -1,11 +1,12 @@
 (ns caioaao.kaocha-greenlight.error-test
-  (:require [clojure.test :refer [deftest testing is]]
-            [com.stuartsierra.component :as component]
-            [kaocha.api :as api]
-            [kaocha.result :as result]
-            [matcher-combinators.test]
-            [matcher-combinators.matchers :as matchers]
-            [matcher-combinators.parser :refer [mimic-matcher]]))
+  (:require
+   [clojure.test :refer [deftest testing is]]
+   [com.stuartsierra.component :as component]
+   [kaocha.api :as api]
+   [kaocha.result :as result]
+   [matcher-combinators.matchers :as matchers]
+   [matcher-combinators.parser :refer [mimic-matcher]]
+   [matcher-combinators.test]))
 
 (mimic-matcher matchers/equals clojure.lang.Var)
 

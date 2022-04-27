@@ -1,14 +1,15 @@
 (ns caioaao.kaocha-greenlight.type-test
-  (:require [clojure.test :refer [deftest is testing]]
-            [com.stuartsierra.component :as component]
-            [kaocha.testable :as testable]
-            [kaocha.api :as api]
-            [kaocha.result :as result]
-            [matcher-combinators.test]
-            [matcher-combinators.parser :refer [mimic-matcher]]
-            [caioaao.kaocha-greenlight.test-suite.blue-test]
-            [caioaao.kaocha-greenlight.test-suite.red-test]
-            [matcher-combinators.matchers :as matchers]))
+  (:require
+   [caioaao.kaocha-greenlight.test-suite.blue-test]
+   [caioaao.kaocha-greenlight.test-suite.red-test]
+   [clojure.test :refer [deftest is testing]]
+   [com.stuartsierra.component :as component]
+   [kaocha.api :as api]
+   [kaocha.result :as result]
+   [kaocha.testable :as testable]
+   [matcher-combinators.matchers :as matchers]
+   [matcher-combinators.parser :refer [mimic-matcher]]
+   [matcher-combinators.test]))
 
 (mimic-matcher matchers/equals clojure.lang.Var)
 
@@ -54,17 +55,17 @@
                                            :kaocha.testable/id     :caioaao.kaocha-greenlight.test-suite.blue-test
                                            :kaocha.testable/desc   "caioaao.kaocha-greenlight.test-suite.blue-test"
                                            :kaocha.ns/name         'caioaao.kaocha-greenlight.test-suite.blue-test
-                                           :kaocha.test-plan/tests [{:kaocha.testable/type                    :caioaao.kaocha-greenlight.test/var
-                                                                     :kaocha.testable/id                      :caioaao.kaocha-greenlight.test-suite.blue-test/sample-test
-                                                                     :caioaao.kaocha-greenlight.test/test-var #'caioaao.kaocha-greenlight.test-suite.blue-test/sample-test}]}]}
+                                           :kaocha.test-plan/tests [{:kaocha.testable/type :caioaao.kaocha-greenlight.test/var
+                                                                     :kaocha.testable/id   :caioaao.kaocha-greenlight.test-suite.blue-test/sample-test
+                                                                     :kaocha.var/var       #'caioaao.kaocha-greenlight.test-suite.blue-test/sample-test}]}]}
                 (testable/load test-suite-blue)))
     (is (match? {:kaocha.test-plan/tests [{:kaocha.testable/type   :caioaao.kaocha-greenlight.test/ns
                                            :kaocha.testable/id     :caioaao.kaocha-greenlight.test-suite.red-test
                                            :kaocha.testable/desc   "caioaao.kaocha-greenlight.test-suite.red-test"
                                            :kaocha.ns/name         'caioaao.kaocha-greenlight.test-suite.red-test
-                                           :kaocha.test-plan/tests [{:kaocha.testable/type                    :caioaao.kaocha-greenlight.test/var
-                                                                     :kaocha.testable/id                      :caioaao.kaocha-greenlight.test-suite.red-test/sample-test
-                                                                     :caioaao.kaocha-greenlight.test/test-var #'caioaao.kaocha-greenlight.test-suite.red-test/sample-test}]}]}
+                                           :kaocha.test-plan/tests [{:kaocha.testable/type :caioaao.kaocha-greenlight.test/var
+                                                                     :kaocha.testable/id   :caioaao.kaocha-greenlight.test-suite.red-test/sample-test
+                                                                     :kaocha.var/var       #'caioaao.kaocha-greenlight.test-suite.red-test/sample-test}]}]}
                 (testable/load test-suite-red))))
 
   (testing "description is correct"
