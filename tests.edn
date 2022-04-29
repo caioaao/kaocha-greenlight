@@ -1,11 +1,11 @@
 #kaocha/v1
-{:plugins [:kaocha.plugin/profiling
-           :kaocha.plugin/orchestra
-           :kaocha.plugin.alpha/spec-test-check]
+ {:plugins [:kaocha.plugin/profiling
+            :kaocha.plugin/orchestra
+            :kaocha.plugin.alpha/spec-test-check]
 
- :reporter kaocha.report/documentation
+  :reporter kaocha.report/documentation
 
- :kaocha.plugin.capture-output/capture-output? false
+  :kaocha.plugin.capture-output/capture-output? false
 
- :clojure.spec.test.check/instrument?    true
- :clojure.spec.test.check/check-asserts? true}
+  :clojure.spec.test.check/instrument?    true
+  :clojure.spec.test.check/check-asserts? true}
