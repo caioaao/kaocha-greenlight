@@ -1,4 +1,6 @@
-[![CircleCI](https://circleci.com/gh/caioaao/kaocha-greenlight/tree/master.svg?style=svg)](https://circleci.com/gh/caioaao/kaocha-greenlight/tree/master) [![Clojars Project](https://img.shields.io/clojars/v/caioaao/kaocha-greenlight.svg)](https://clojars.org/caioaao/kaocha-greenlight)
+[![CircleCI](https://circleci.com/gh/caioaao/kaocha-greenlight/tree/master.svg?style=svg)](https://circleci.com/gh/caioaao/kaocha-greenlight/tree/master)
+[![Clojars
+Project](https://img.shields.io/clojars/v/caioaao/kaocha-greenlight.svg)](https://clojars.org/caioaao/kaocha-greenlight)
 
 # kaocha-greenlight
 
@@ -6,11 +8,21 @@ Kaocha plugin to run [greenlight](/amperity/greenlight) tests.
 
 ## Installing
 
-The project is published through Clojars with the identifier `caioaao/kaocha-greenlight`. You can find version information for the latest release at https://clojars.org/caioaao/kaocha-greenlight.
+The project is published through Clojars with the identifier
+[`caioaao/kaocha-greenlight`](https://clojars.org/caioaao/kaocha-greenlight).
+You can find version information for the latest release on
+[GitHub](https://clojars.org/caioaao/kaocha-greenlight).
 
 ## Usage
 
-Declare a test suite on your [Kaocha config file](https://cljdoc.org/d/lambdaisland/kaocha/0.0-413/doc/3-configuration) with the type `:caioaao.kaocha-greenlight/test`. You'll also need to provide a value for `:caioaao.kaocha-greenlight/new-system`, which should be a function that receives no arguments and returns [a stuartsierra's system map](https://github.com/stuartsierra/component).
+Declare a test suite on your [Kaocha config
+file](https://cljdoc.org/d/lambdaisland/kaocha/1.66.1034/doc/3-configuration) with
+the type `:caioaao.kaocha-greenlight/test`. You'll also need to provide a value
+for `:caioaao.kaocha-greenlight/new-system`, which should be a function that
+receives no arguments and returns [a greenlight
+ManagedSystem](https://github.com/amperity/greenlight#test-system), [a
+stuartsierra's system map](https://github.com/stuartsierra/component), or (in
+rare cases) any other object that will not have its lifecycle managed.
 
 A `tests.edn` example:
 
@@ -53,7 +65,9 @@ var, for the same reasons as above:
           :caioaao.kaocha-greenlight/system-scope :var}]}
 ```
 
-For documentation on how to run tests, refer to [Kaocha](/lambdaisland/kaocha). For documentation regarding writing tests, refer to [Greenlight](/amperity/greenlight).
+For documentation on how to run tests, refer to
+[Kaocha](https://github.com/lambdaisland/kaocha). For documentation regarding
+writing tests, refer to [Greenlight](https://github.com/amperity/greenlight).
 
 ## License
 

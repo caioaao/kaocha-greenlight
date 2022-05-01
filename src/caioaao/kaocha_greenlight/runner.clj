@@ -1,6 +1,6 @@
 (ns caioaao.kaocha-greenlight.runner
   (:require
-   [com.stuartsierra.component :as component]))
+   [greenlight.runner :as runner]))
 
 (defn run
   [testable test-plan level run-fn]
@@ -15,11 +15,11 @@
       (run-fn testable test-plan)
       (let [system    (-> test-plan
                           :caioaao.kaocha-greenlight.test/system
-                          component/start)
+                          runner/start-system)
             test-plan (assoc test-plan
                              :caioaao.kaocha-greenlight.test/system
                              system)]
         (try
           (run-fn testable test-plan)
           (finally
-            (component/stop system)))))))
+            (runner/stop-system system)))))))

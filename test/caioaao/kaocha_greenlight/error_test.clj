@@ -1,7 +1,6 @@
 (ns caioaao.kaocha-greenlight.error-test
   (:require
    [clojure.test :refer [deftest testing is]]
-   [com.stuartsierra.component :as component]
    [kaocha.api :as api]
    [kaocha.result :as result]
    [matcher-combinators.matchers :as matchers]
@@ -12,7 +11,7 @@
 
 (defn new-system
   [& _]
-  (component/system-map :greenlight.test-test/component {}))
+  {:greenlight.test-test/component {}})
 
 (def error-config
   {:kaocha/tests [{:kaocha.testable/type :caioaao.kaocha-greenlight/test

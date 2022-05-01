@@ -4,6 +4,7 @@
    [caioaao.kaocha-greenlight.test-suite.red-test]
    [clojure.test :refer [deftest is testing]]
    [com.stuartsierra.component :as component]
+   [greenlight.runner :as runner]
    [kaocha.api :as api]
    [kaocha.result :as result]
    [kaocha.testable :as testable]

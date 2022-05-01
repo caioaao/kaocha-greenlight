@@ -6,9 +6,10 @@
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [amperity/greenlight "0.6.1"]
                  [lambdaisland/kaocha "1.66.1034"]]
-  :aliases {"test" ["run" "-m" "kaocha.runner"]}
+  :aliases {"kaocha" ["run" "-m" "kaocha.runner"]}
   :profiles {:dev {:dependencies [[nubank/matcher-combinators "3.5.0"]
                                   [orchestra "2021.01.01-1"]
+                                  [com.stuartsierra/component "1.1.0"]
                                   [org.clojure/test.check "1.1.0"]
                                   [expound "0.9.0"]]
                    :source-paths ["dev"]
