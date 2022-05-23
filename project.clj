@@ -1,4 +1,4 @@
-(defproject caioaao/kaocha-greenlight "0.6.1"
+(defproject caioaao/kaocha-greenlight "0.6.2-SNAPSHOT"
   :description "Kaocha extension to run amperity/greenlight tests"
   :url "http://github.com/caioaao/kaocha-greenlight"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
