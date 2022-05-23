@@ -1,7 +1,7 @@
 (ns caioaao.kaocha-greenlight.scope-test
   (:require
    [clojure.test :refer [deftest testing is]]
-   [com.stuartsierra.component :as component]
+   [greenlight.runner :as runner]
    [kaocha.api :as api]
    [matcher-combinators.matchers :as matchers]
    [matcher-combinators.parser :refer [mimic-matcher]]))
@@ -13,14 +13,12 @@
 
 (defn new-system
   [& _]
-  (component/system-map :greenlight.test-test/component
-                        (with-meta {}
-                          {`component/start (fn [this]
-                                              (swap! starts inc)
-                                              this)
-                           `component/stop  (fn [this]
-                                              (swap! stops inc)
-                                              this)})))
+  (with-meta {} {`runner/start-system (fn [this]
+                                        (swap! starts inc)
+                                        this)
+                 `runner/stop-system  (fn [this]
+                                        (swap! stops inc)
+                                        this)}))
 
 (def test-config
   {:kaocha/tests [{:kaocha.testable/type :caioaao.kaocha-greenlight/test
