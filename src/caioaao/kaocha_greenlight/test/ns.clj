@@ -1,6 +1,7 @@
 (ns caioaao.kaocha-greenlight.test.ns
   (:require
    [caioaao.kaocha-greenlight.runner :as runner]
+   [caioaao.kaocha-greenlight.test.var]
    [clojure.spec.alpha :as s]
    [clojure.test :as t]
    [kaocha.hierarchy :as hierarchy]
