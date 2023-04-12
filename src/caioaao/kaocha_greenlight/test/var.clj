@@ -2,14 +2,16 @@
   (:require
    [caioaao.kaocha-greenlight.runner :as runner]
    [clojure.spec.alpha :as s]
-   [clojure.test :as ctest]
    [clojure.test :as t]
    [greenlight.report :as report]
    [greenlight.step :as step]
    [greenlight.test :as test]
    [kaocha.hierarchy :as hierarchy]
-   [kaocha.testable :as testable]
-   [kaocha.type.var]))
+   [kaocha.testable :as testable]))
+
+(defn ^:private timeout?
+  [outcome]
+  (= outcome :timeout))
 
 (defn ^:private run-test!
   [testable test-plan]
@@ -18,7 +20,15 @@
         system   (:caioaao.kaocha-greenlight.test/system test-plan)
         test-var (:kaocha.var/var testable)]
     (binding [test/*report* report]
-      (test/run-test! system (test-var)))))
+      (let [result (test/run-test! system (test-var))]
+        (when (timeout? (::test/outcome result))
+          (t/do-report {:type    :error
+                        :message (->> result
+                                      ::test/steps
+                                      (filter #(timeout? (::step/outcome %)))
+                                      last
+                                      ::step/message)}))
+        result))))
 
 (defmethod testable/-run :caioaao.kaocha-greenlight.test/var
   [testable test-plan]
