@@ -7,7 +7,8 @@
    [greenlight.step :as step]
    [greenlight.test :as test]
    [kaocha.hierarchy :as hierarchy]
-   [kaocha.testable :as testable]))
+   [kaocha.testable :as testable]
+   [kaocha.type.var]))
 
 (defn ^:private timeout?
   [outcome]
